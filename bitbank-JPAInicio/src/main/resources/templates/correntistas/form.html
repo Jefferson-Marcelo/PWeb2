@@ -1,0 +1,28 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}" th:with="titulo='Cadastro de correntista'">
+
+<body>
+    <div layout:fragment="content">
+        <form th:action="@{/correntistas}" method="POST" th:object="${correntista}">
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" th:field="*{nome}" class="form-control" /><br /><br />
+
+            <label for="nome" class="form-label">Senha:</label>
+            <input type="password" th:field="*{senha}" class="form-control" /><br /><br />
+
+            <label for="nome" class="form-label">Email:</label>
+            <input type="text" th:field="*{email}" class="form-control" /><br /><br />
+
+            <input type="checkbox" th:field="*{admin}" class="form-check-input" />
+            <label class="form-check-label">
+                Administrador
+            </label>
+
+            <br /><br />
+            <input type="submit" value="Salvar" />
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}" th:with="titulo='Cadastro de conta'">
+
+<body>
+    <div layout:fragment="content">
+
+        <form th:action="@{/contas}" method="POST" th:object="${conta}">
+            <input type="hidden" th:field="*{id}" class="form-control" />
+
+            <label for="correntista">Número</label>
+            <input type="text" th:field="*{numero}" class="form-control" /><br /><br />
+
+            <label for="correntista">Correntista</label>
+            <select th:field="*{correntista.id}" class="form-select">
+                <option th:each="cor : ${correntistaItems}" th:value="${cor.id}" th:label="${cor.nome}" />
+            </select>
+            <br /><br />
+
+            <label for="lastName">Data</label>
+            <input type="text" th:field="*{data}" class="form-control" /><br /><br />
+
+            <hr>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a class="btn btn-secondary" th:href="@{/contas}">Cancelar</a>
+        </form>
+    </div>
+</body>
+
+</html>

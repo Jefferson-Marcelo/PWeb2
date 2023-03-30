@@ -1,0 +1,44 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}" th:with="titulo='Correntistas cadastrados'">
+
+<body>
+    <div layout:fragment="content">
+
+        <form th:action="@{/correntistas/form}" method="GET">
+            <button class="btn btn-primary" type="submit">Novo correntista</button>
+        </form>
+        <br />
+
+        <div th:if="${not #lists.isEmpty(correntistas)}">
+            <div th:text="'Total ' + ${#lists.size(correntistas)} + ' registros'" style="text-align: right; color: gray; font-size: 0.85em;" />
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Admin</th>
+                        <th>Senha</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="correntista : ${correntistas}">
+                        <td><a th:href="@{/correntistas/{id}(id=${correntista.id})}" th:text="${correntista.nome}"></a></td>
+                        <td th:text="${correntista.email}"></td>
+                        <td>
+                            <img th:if="${correntista.admin}" th:src="@{/imagens/admin.png}" />
+                            <img th:unless="${correntista.admin}" th:src="@{/imagens/naoadmin.png}" />
+                        </td>
+                        <td th:text="${#strings.substring(correntista.senha,0,3)} + '...'"></td>
+                        <td>
+                            <form th:action="@{/correntistas/{id}/delete(id=${correntista.id})}">
+                                <button type="submit" class="btn btn-primary btn-sm" }>Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

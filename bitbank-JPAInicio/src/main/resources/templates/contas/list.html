@@ -1,0 +1,39 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<body>
+    <div layout:fragment="content">
+        <form th:action="@{/contas/form}" method="GET">
+            <button class="btn btn-primary" type="submit">Nova conta</button>
+        </form>
+        <br />
+        <div th:if="${not #lists.isEmpty(contas)}">
+            <div th:text="'Total ' + ${#lists.size(contas)} + ' registros'" style="text-align: right; color: gray; font-size: 0.85em;" />
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Correntista</th>
+                        <th style="text-align: center;">Data abertura</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="conta : ${contas}">
+                        <td><a th:href="@{/contas/{id}(id=${conta.id})}" th:text="${conta.numero}"></a></td>
+                        <td><a th:text="${conta.correntista.nome}"></a></td>
+                        <td th:text="${#dates.format(conta.data, 'dd/MM/yyyy')}" style="text-align: center;" />
+                        <td>
+                            <form th:action="@{/contas/{id}/delete(id=${conta.id})}">
+                                <button type="submit" class="btn btn-primary btn-sm" }>Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
